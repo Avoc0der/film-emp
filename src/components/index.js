@@ -4,3 +4,4 @@ export { ProfileInformation } from './ProfileInformation/ProfileInformation';
 export { Movies } from './Movies/Movies';
 export { NavBar } from './NavBar/NavBar';
 export { Layout } from './Layout/Layout';
+export { Search } from './Search/Search';
