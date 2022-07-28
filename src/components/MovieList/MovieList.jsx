@@ -7,7 +7,7 @@ export const MovieList = ({ movies }) => {
   return (
     <StyledGrid container>
       {movies?.results.map((movie, i) => (
-        <Movie key={i} movie={movie} i={i} />
+        <Movie key={movie.id} movie={movie} i={i} />
       ))}
     </StyledGrid>
   );

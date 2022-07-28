@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -10,4 +11,30 @@ export const StyledTypography = styled(Typography)(({ theme }) => ({
   marginTop: '10px',
   marginBottom: 0,
   textAlign: 'center',
+}));
+
+export const StyledImage = styled('img')({
+  borderRadius: '20px',
+  height: '300px',
+  marginBottom: '10px',
+  '&:hover': {
+    transform: 'scale(1.05)',
+
+  },
+
+});
+
+export const StyledLink = styled(Link)(({ theme }) => ({
+  alignItems: 'center',
+  fontWeight: 'bolder',
+  textDecoration: 'none',
+
+  [theme.breakpoints.up('xs')]: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  '&:hover': {
+    cursor: 'pointer',
+  },
+
 }));

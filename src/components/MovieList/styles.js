@@ -2,8 +2,9 @@ import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const StyledGrid = styled(Grid)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  marginRight: '240px',
+  display: 'flex',
+  flexWrap: 'wrap',
   overflow: 'auto',
   [theme.breakpoints.down('sm')]: {
     justifyContent: 'center',
