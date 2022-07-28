@@ -7,7 +7,6 @@ const thumbnailImageLink = 'https://www.fillmuray.com/200/300';
 
 export const Movie = ({ movie, i }) => {
   const imageSrc = movie.poster_path ? `${imageTmdbLink}${movie.poster_path}` : thumbnailImageLink;
-  console.log('movie', movie);
   return (
     <Grid sx={{ padding: '10px' }} item xs={12} sm={6} md={4} lg={3} xl={2}>
       <Grow in key={i} timeout={250 * (i + 1)}>

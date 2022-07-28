@@ -12,7 +12,7 @@ export const StyledImage = styled('img')({
   width: '70%',
 });
 export const StyledGenreImage = styled('img')(({ theme }) => ({
-  filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
+  filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'dark',
 }));
 export const StyledCategoriesLink = styled(Link)(({ theme }) => ({
   color: theme.palette.text.primary,
