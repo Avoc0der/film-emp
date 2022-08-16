@@ -15,8 +15,10 @@ export const StyledTypography = styled(Typography)(({ theme }) => ({
 
 export const StyledImage = styled('img')({
   borderRadius: '20px',
-  height: '300px',
+  // height: '300px',
+  width: '100%',
   marginBottom: '10px',
+  transition: 'all 0.3s ease-out',
   '&:hover': {
     transform: 'scale(1.05)',
 
