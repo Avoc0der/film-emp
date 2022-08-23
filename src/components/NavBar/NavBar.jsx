@@ -1,32 +1,48 @@
-import React, { useState } from 'react';
-import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { AppBar, IconButton, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import { Search } from '../Search/Search';
 import { Sidebar } from '../Sidebar/Sidebar';
-import { StyledDrawer, StyledLinkButton } from './styles';
+import { StyledDrawer, StyledLinkButton, StyledToolbar } from './styles';
+
+import { fetchToken, createSessionId, moviesApi } from '../../utils';
+import { setUser, userSelector } from '../../features/auth';
 
 export const NavBar = () => {
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector(userSelector);
   const [mobileOpen, setMobileOpen] = useState(false);
   const themeObject = useTheme();
-  const isAuthenticated = true;
+
+  const token = localStorage.getItem('request_token');
+  const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+
+  useEffect(() => {
+    const logInUser = async () => {
+      if (token) {
+        if (sessionIdFromLocalStorage) {
+          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
+          dispatch(setUser(userData));
+        } else {
+          const sessionId = await createSessionId();
+          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
+
+          dispatch(setUser(userData));
+        }
+      }
+    };
+    logInUser();
+  }, [token]);
 
   const isMobile = useMediaQuery('(max-width: 600px)');
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar sx={(theme) => ({
-          height: '80px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginLeft: '240px',
-          [theme.breakpoints.down('sm')]: {
-            marginLeft: 0,
-            flexWrap: 'wrap',
-          },
-        })}
-        >
+        <StyledToolbar>
+
           {isMobile && (
           <IconButton
             sx={(theme) => ({ mr: 2, [theme.breakpoints.up('sm')]: { display: 'none' } })}
@@ -44,16 +60,16 @@ export const NavBar = () => {
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit" onClick={() => {}}>Login &nbsp; <AccountCircle /></Button>
+              <Button color="inherit" onClick={fetchToken}>Login &nbsp; <AccountCircle /></Button>
             ) : (
-              <StyledLinkButton color="inherit" component={Link} to="/profile/:id" onClick={() => {}}>
+              <StyledLinkButton color="inherit" component={Link} to={`/profile/${user.id}`} onClick={() => {}}>
                 {!isMobile && <>My Movies &nbsp;</>}
                 <Avatar style={{ width: 30, height: 30 }} alt="Profile" src="https://cdn0.iconfinder.com/data/icons/communication-456/24/account_profile_user_contact_person_avatar_placeholder-512.png" />
               </StyledLinkButton>
             )}
           </div>
           {isMobile && <Search />}
-        </Toolbar>
+        </StyledToolbar>
       </AppBar>
       <div>
         <nav>
