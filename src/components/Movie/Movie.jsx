@@ -1,15 +1,16 @@
 import React from 'react';
 import { Grid, Grow, Tooltip, Rating } from '@mui/material';
 import { StyledTypography, StyledImage, StyledLink } from './styles';
+import { imageTmdbLink } from '../../constants';
 
-const imageTmdbLink = 'https://image.tmdb.org/t/p/w500/';
 const thumbnailImageLink = 'https://www.fillmuray.com/200/300';
 
 export const Movie = ({ movie, i }) => {
   const imageSrc = movie.poster_path ? `${imageTmdbLink}${movie.poster_path}` : thumbnailImageLink;
   return (
-    <Grid sx={{ padding: '10px' }} item 
-    // xs={12} sm={6} md={4} lg={3} xl={2}
+    <Grid
+      sx={{ padding: '10px' }}
+      item
     >
       <Grow in key={i} timeout={250 * (i + 1)}>
         <StyledLink to={`/movie/${movie.id}`}>

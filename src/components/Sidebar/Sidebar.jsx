@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledLink, StyledImage, StyledGenreImage, StyledCategoriesLink } from './styles';
+import { StyledLink, StyledImage, StyledCategoriesLink } from './styles';
+import { StyledGenreImage } from '../styles';
 import { useGetGenresQuery } from '../../services/TMDB';
 
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
